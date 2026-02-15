@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 262 90% 62%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 262 90% 75%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 210 100% 75%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262 90% 62%;
+    --radius: 0.75rem;
+    
+    /* Premium Design Tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(262 90% 62%) 0%, hsl(210 100% 60%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(262 95% 97%) 0%, hsl(210 100% 97%) 50%, hsl(180 85% 97%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(262 90% 99%) 50%, hsl(210 100% 99%) 100%);
+    --gradient-mesh: radial-gradient(at 0% 0%, hsl(262 90% 62% / 0.15) 0px, transparent 50%),
+                     radial-gradient(at 100% 0%, hsl(210 100% 60% / 0.15) 0px, transparent 50%),
+                     radial-gradient(at 100% 100%, hsl(180 85% 60% / 0.15) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(262 90% 62% / 0.15) 0px, transparent 50%);
+    --shadow-elegant: 0 20px 60px -15px hsl(262 90% 62% / 0.35), 0 8px 16px -8px hsl(262 90% 62% / 0.2);
+    --shadow-glow: 0 0 60px hsl(262 90% 62% / 0.25), 0 0 100px hsl(210 100% 60% / 0.15);
+    --shadow-premium: 0 25px 50px -12px hsl(262 90% 62% / 0.25), 0 12px 24px -8px hsl(210 100% 60% / 0.15);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 262 90% 62%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 262 90% 75%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 210 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 210 100% 75%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 262 90% 62%;
+    
+    /* Premium Design Tokens */
+    --gradient-hero: linear-gradient(135deg, hsl(262 90% 12%) 0%, hsl(210 100% 12%) 50%, hsl(180 85% 12%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(222.2 84% 4.9%) 0%, hsl(262 90% 8%) 50%, hsl(217.2 32.6% 10%) 100%);
+    --gradient-mesh: radial-gradient(at 0% 0%, hsl(262 90% 62% / 0.2) 0px, transparent 50%),
+                     radial-gradient(at 100% 0%, hsl(210 100% 60% / 0.2) 0px, transparent 50%),
+                     radial-gradient(at 100% 100%, hsl(180 85% 60% / 0.2) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(262 90% 62% / 0.2) 0px, transparent 50%);
+    --shadow-elegant: 0 20px 60px -15px hsl(262 90% 62% / 0.6), 0 8px 16px -8px hsl(262 90% 62% / 0.4);
+    --shadow-glow: 0 0 60px hsl(262 90% 62% / 0.4), 0 0 100px hsl(210 100% 60% / 0.2);
+    --shadow-premium: 0 25px 50px -12px hsl(262 90% 62% / 0.4), 0 12px 24px -8px hsl(210 100% 60% / 0.25);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism Effects */
+  .glass {
+    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+  }
+  
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-2xl border border-border/40 shadow-[var(--shadow-elegant)];
+  }
+  
+  /* Premium Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradient-shift 8s ease infinite;
+  }
+  
+  /* Animated Background Gradient */
+  .animated-gradient {
+    background: var(--gradient-mesh);
+    animation: mesh-movement 20s ease infinite;
+  }
+  
+  /* Dot Pattern Background */
+  .dot-pattern {
+    background-image: radial-gradient(circle, hsl(var(--primary) / 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  
+  /* Premium Container */
+  .section-container {
+    @apply container mx-auto px-6 md:px-8 lg:px-12;
+  }
+  
+  /* Hover Lift Effect */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-2 shadow-[var(--shadow-premium)];
+  }
+  
+  /* Smooth Fade In Animation */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  /* Scroll Reveal */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes mesh-movement {
+  0%, 100% {
+    background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%;
+  }
+  25% {
+    background-position: 10% 10%, 90% 10%, 90% 90%, 10% 90%;
+  }
+  50% {
+    background-position: 20% 5%, 80% 20%, 85% 80%, 5% 85%;
+  }
+  75% {
+    background-position: 10% 15%, 85% 10%, 90% 85%, 15% 90%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
