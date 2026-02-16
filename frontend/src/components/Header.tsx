@@ -43,6 +43,12 @@ const Header = () => {
             >
               Language Detector
             </Link>
+            <Link
+              to="/compare-translations"
+              className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
+            >
+              Compare
+            </Link>
             <a
               href="#features"
               className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
@@ -89,6 +95,13 @@ const Header = () => {
                   className="text-lg font-medium hover:text-primary transition-colors"
                 >
                   Language Detector
+                </Link>
+                <Link
+                  to="/compare-translations"
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg font-medium hover:text-primary transition-colors"
+                >
+                  Compare
                 </Link>
                 <a
                   href="#features"
