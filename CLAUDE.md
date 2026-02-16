@@ -73,6 +73,7 @@ translationforfree/                # Monorepo root
 8. **Don't touch `frontend/src/components/ui/`.** These are generated shadcn/ui components. Only modify if customizing specific behavior.
 9. **Persist research.** When exploring a new topic or making architecture decisions, save findings to `docs/` so future sessions can build on it.
 10. **Test before shipping.** Run `cd frontend && npm run build` to verify no build errors before considering a feature done.
+11. **Update sitemap on new pages.** When adding or removing a route, update `frontend/public/sitemap.xml` to include the new URL. Don't wait to be asked.
 
 ## Context Routing
 
