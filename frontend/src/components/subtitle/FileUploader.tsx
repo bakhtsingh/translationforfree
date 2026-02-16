@@ -16,6 +16,7 @@ import {
 import { readFileAsText, getFileFormat, formatFileSize } from '../../services/fileHandler';
 import { parseSRT, parseVTT } from '../../services/subtitleParser';
 import { calculateTotalDuration } from '../../services/fileHandler';
+import { detectLanguage } from '../../services/languageDetectionService';
 
 export function FileUploader() {
   const { state } = useTranslation();
@@ -86,6 +87,19 @@ export function FileUploader() {
         title: 'File uploaded successfully',
         description: `${cues.length} subtitles loaded`,
       });
+
+      // Auto-detect source language in the background
+      const sampleText = cues.slice(0, 10).map(c => c.text).join(' ');
+      if (sampleText.trim()) {
+        detectLanguage({ text: sampleText }).then((result) => {
+          if (result.success && result.detected_language) {
+            actions.setSourceLanguage(result.detected_language);
+            console.log(`🌐 Auto-detected language: ${result.detected_language}`);
+          }
+        }).catch(() => {
+          // Silent fail — user can still pick manually
+        });
+      }
     } catch (error) {
       console.error('❌ File parsing failed:', error);
       actions.setError({
