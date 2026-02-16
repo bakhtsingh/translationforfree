@@ -8,11 +8,27 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Subtitle Translation Tool (Main Feature) -->
+  <!-- Subtitle Translation Tool -->
   <url>
     <loc>https://translationforfree.com/subtitle-translate</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Text Translation Tool -->
+  <url>
+    <loc>https://translationforfree.com/text-translate</loc>
+    <lastmod>2025-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Language Detector Tool -->
+  <url>
+    <loc>https://translationforfree.com/detect-language</loc>
+    <lastmod>2025-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
