@@ -25,6 +25,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/text-translate" className="hover:text-primary transition-colors">Text Translator</Link></li>
               <li><Link to="/subtitle-translate" className="hover:text-primary transition-colors">Subtitle Translator</Link></li>
+              <li><Link to="/detect-language" className="hover:text-primary transition-colors">Language Detector</Link></li>
               <li><a href="#features" className="hover:text-primary transition-colors">Features</a></li>
               <li><a href="#faq" className="hover:text-primary transition-colors">FAQ</a></li>
             </ul>

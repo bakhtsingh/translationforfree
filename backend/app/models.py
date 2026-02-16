@@ -98,3 +98,23 @@ class TextTranslationResponse(BaseModel):
     source_language: str
     target_language: str
     error_message: Optional[str] = None
+
+
+# --- Language Detection Models ---
+
+class LanguageDetectionRequest(BaseModel):
+    """Request model for language detection"""
+    text: str = Field(..., min_length=1, max_length=5000, description="Text to detect language of")
+
+    @validator('text')
+    def validate_text(cls, v):
+        if not v.strip():
+            raise ValueError('Text cannot be empty or only whitespace')
+        return v.strip()
+
+class LanguageDetectionResponse(BaseModel):
+    """Response model for language detection"""
+    success: bool
+    detected_language: Optional[str] = None
+    confidence: Optional[float] = Field(None, ge=0, le=1, description="Confidence score 0-1")
+    error_message: Optional[str] = None

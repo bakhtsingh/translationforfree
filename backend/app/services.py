@@ -257,7 +257,61 @@ class TextTranslationService:
             return False, None, error_msg
 
 
+class LanguageDetectionService:
+    """Service for detecting the language of text via Google Gemini API"""
+
+    MODEL = "gemini-2.5-flash-lite"
+
+    def __init__(self):
+        if not settings.gemini_api_key:
+            raise ValueError("GEMINI_API_KEY is required but not provided")
+        genai.configure(api_key=settings.gemini_api_key)
+        self.model = genai.GenerativeModel(self.MODEL)
+
+    async def detect(self, text: str) -> tuple[bool, Optional[str], Optional[float], Optional[str]]:
+        """Detect the language of the given text.
+        Returns (success, detected_language, confidence, error_message).
+        """
+        prompt = (
+            "You are a language identification expert. "
+            "Detect the language of the following text.\n\n"
+            "INSTRUCTIONS:\n"
+            "- Return ONLY a JSON object with two keys: \"language\" and \"confidence\"\n"
+            "- \"language\" should be the full English name of the language (e.g. \"Spanish\", \"Japanese\")\n"
+            "- \"confidence\" should be a float between 0 and 1 indicating how confident you are\n"
+            "- Do NOT add any explanation or text outside the JSON\n\n"
+            f"Text:\n{text}"
+        )
+
+        try:
+            response = await asyncio.to_thread(
+                self.model.generate_content, prompt
+            )
+            result = self._parse_response(response.text)
+            logger.info(f"Language detection: {result['language']} ({result['confidence']})")
+            return True, result["language"], result["confidence"], None
+
+        except Exception as e:
+            error_msg = f"Language detection failed: {str(e)}"
+            logger.error(error_msg)
+            return False, None, None, error_msg
+
+    @staticmethod
+    def _parse_response(response_text: str) -> dict:
+        """Parse JSON from Gemini response."""
+        cleaned = response_text.strip()
+        cleaned = re.sub(r"^```(?:json)?\s*\n?", "", cleaned)
+        cleaned = re.sub(r"\n?```\s*$", "", cleaned)
+        cleaned = cleaned.strip()
+
+        parsed = json.loads(cleaned)
+        if not isinstance(parsed, dict) or "language" not in parsed or "confidence" not in parsed:
+            raise ValueError("Response must be a JSON object with 'language' and 'confidence' keys")
+        return parsed
+
+
 # Global service instances
 translation_service = TranslationService()
 subtitle_translation_service = SubtitleTranslationService()
 text_translation_service = TextTranslationService()
+language_detection_service = LanguageDetectionService()

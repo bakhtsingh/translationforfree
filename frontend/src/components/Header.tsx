@@ -37,6 +37,12 @@ const Header = () => {
             >
               Subtitle Translator
             </Link>
+            <Link
+              to="/detect-language"
+              className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
+            >
+              Language Detector
+            </Link>
             <a
               href="#features"
               className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
@@ -76,6 +82,13 @@ const Header = () => {
                   className="text-lg font-medium hover:text-primary transition-colors"
                 >
                   Subtitle Translator
+                </Link>
+                <Link
+                  to="/detect-language"
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg font-medium hover:text-primary transition-colors"
+                >
+                  Language Detector
                 </Link>
                 <a
                   href="#features"

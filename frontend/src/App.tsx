@@ -8,6 +8,7 @@ import ReactGA from "react-ga4";
 import Index from "./pages/Index";
 import SubtitleTranslation from "./pages/SubtitleTranslation";
 import TextTranslation from "./pages/TextTranslation";
+import LanguageDetection from "./pages/LanguageDetection";
 import NotFound from "./pages/NotFound";
 import PageViewTracker from "./components/PageViewTracker";
 
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/subtitle-translate" element={<SubtitleTranslation />} />
             <Route path="/text-translate" element={<TextTranslation />} />
+            <Route path="/detect-language" element={<LanguageDetection />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

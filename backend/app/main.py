@@ -15,8 +15,10 @@ from app.models import (
     SubtitleTranslationResponse,
     TextTranslationRequest,
     TextTranslationResponse,
+    LanguageDetectionRequest,
+    LanguageDetectionResponse,
 )
-from app.services import translation_service, subtitle_translation_service, text_translation_service
+from app.services import translation_service, subtitle_translation_service, text_translation_service, language_detection_service
 
 # Configure logging
 logging.basicConfig(
@@ -142,6 +144,31 @@ async def translate_text_gemini(request: TextTranslationRequest):
             success=False,
             source_language=request.source_language,
             target_language=request.target_language,
+            error_message=str(e),
+        )
+
+
+@app.post("/detect/language", response_model=LanguageDetectionResponse)
+async def detect_language(request: LanguageDetectionRequest):
+    """Detect the language of the given text via Gemini API."""
+    try:
+        logger.info(f"Language detection request ({len(request.text)} chars)")
+
+        success, detected_language, confidence, error_message = await language_detection_service.detect(
+            text=request.text,
+        )
+
+        return LanguageDetectionResponse(
+            success=success,
+            detected_language=detected_language,
+            confidence=confidence,
+            error_message=error_message,
+        )
+
+    except Exception as e:
+        logger.error(f"Language detection endpoint failed: {e}")
+        return LanguageDetectionResponse(
+            success=False,
             error_message=str(e),
         )
 

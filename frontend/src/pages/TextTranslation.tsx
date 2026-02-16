@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { ArrowLeftRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { TextInput } from '@/components/text/TextInput';
@@ -26,9 +27,12 @@ const LANGUAGES = [
 ];
 
 export default function TextTranslation() {
-  const [sourceText, setSourceText] = useState('');
+  const location = useLocation();
+  const navState = location.state as { text?: string; sourceLanguage?: string } | null;
+
+  const [sourceText, setSourceText] = useState(navState?.text || '');
   const [translatedText, setTranslatedText] = useState('');
-  const [sourceLanguage, setSourceLanguage] = useState('Auto-detect');
+  const [sourceLanguage, setSourceLanguage] = useState(navState?.sourceLanguage || 'Auto-detect');
   const [targetLanguage, setTargetLanguage] = useState('Spanish');
   const [isTranslating, setIsTranslating] = useState(false);
   const { toast } = useToast();

@@ -23,3 +23,8 @@ export type {
   TextTranslationRequest,
   TextTranslationResponse,
 } from './text';
+
+export type {
+  LanguageDetectionRequest,
+  LanguageDetectionResponse,
+} from './languageDetection';
