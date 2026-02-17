@@ -81,7 +81,7 @@ translationforfree/                # Monorepo root
 - If task involves **new backend/API work** → read `backend/app/main.py`, `backend/app/services.py`, `backend/app/models.py`
 - If task involves **styling/UI** → follow shadcn/ui patterns, check `frontend/src/index.css` for custom classes
 - If task involves **SEO** → check `frontend/index.html` meta tags, `frontend/public/sitemap.xml`, `frontend/public/robots.txt`
-- If task involves **deployment** → check `frontend/netlify.toml` (frontend), `backend/Dockerfile` (backend)
+- If task involves **deployment** → Backend: `gcloud run deploy` from `backend/`. Frontend: just `git push origin main` (Netlify auto-builds from GitHub — never use `netlify deploy` CLI). Config: `frontend/netlify.toml`, `backend/Dockerfile`
 
 ## Scar Tissue (lessons learned)
 
@@ -91,6 +91,7 @@ translationforfree/                # Monorepo root
 - Gemini API key was previously exposed client-side — fixed by routing through backend
 - CORS on backend must list specific origins (`translationforfree.com`, `localhost:8080`)
 - **Always use the venv** (`backend/venv`) when running backend commands — never use system Python
+- **Never use `netlify deploy` CLI.** Frontend deploys via GitHub → Netlify auto-build. Just `git push origin main` and Netlify handles the rest. Do NOT run `npx netlify deploy`.
 
 ## Product Vision
 
