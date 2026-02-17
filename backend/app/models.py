@@ -118,3 +118,32 @@ class LanguageDetectionResponse(BaseModel):
     detected_language: Optional[str] = None
     confidence: Optional[float] = Field(None, ge=0, le=1, description="Confidence score 0-1")
     error_message: Optional[str] = None
+
+
+# --- Transliteration Models ---
+
+class TransliterationRequest(BaseModel):
+    """Request model for transliteration (script conversion)"""
+    text: str = Field(..., min_length=1, max_length=5000, description="Text to transliterate")
+    source_script: str = Field(default="Auto-detect", description="Source script (e.g. 'Devanagari', 'Arabic', or 'Auto-detect')")
+    target_script: str = Field(..., description="Target script (e.g. 'Latin/Roman', 'Devanagari')")
+
+    @validator('text')
+    def validate_text(cls, v):
+        if not v.strip():
+            raise ValueError('Text cannot be empty or only whitespace')
+        return v.strip()
+
+    @validator('target_script')
+    def validate_target_script(cls, v):
+        if not v.strip():
+            raise ValueError('Target script cannot be empty')
+        return v.strip()
+
+class TransliterationResponse(BaseModel):
+    """Response model for transliteration"""
+    success: bool
+    transliterated_text: Optional[str] = None
+    source_script: Optional[str] = None
+    target_script: str
+    error_message: Optional[str] = None

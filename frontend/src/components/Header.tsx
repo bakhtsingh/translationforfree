@@ -49,6 +49,12 @@ const Header = () => {
             >
               Compare
             </Link>
+            <Link
+              to="/transliterate"
+              className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
+            >
+              Transliterate
+            </Link>
             <a
               href="#features"
               className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
@@ -102,6 +108,13 @@ const Header = () => {
                   className="text-lg font-medium hover:text-primary transition-colors"
                 >
                   Compare
+                </Link>
+                <Link
+                  to="/transliterate"
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg font-medium hover:text-primary transition-colors"
+                >
+                  Transliterate
                 </Link>
                 <a
                   href="#features"

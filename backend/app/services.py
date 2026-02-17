@@ -310,8 +310,86 @@ class LanguageDetectionService:
         return parsed
 
 
+class TransliterationService:
+    """Service for transliterating text between scripts via Google Gemini API"""
+
+    MODEL = "gemini-2.5-flash-lite"
+
+    def __init__(self):
+        if not settings.gemini_api_key:
+            raise ValueError("GEMINI_API_KEY is required but not provided")
+        genai.configure(api_key=settings.gemini_api_key)
+        self.model = genai.GenerativeModel(self.MODEL)
+
+    async def transliterate(
+        self,
+        text: str,
+        source_script: str,
+        target_script: str,
+    ) -> tuple[bool, Optional[str], Optional[str], Optional[str]]:
+        """Transliterate text between scripts.
+        Returns (success, transliterated_text, detected_source_script, error_message).
+        """
+        source_instruction = (
+            f"The text is written in {source_script} script. "
+            if source_script != "Auto-detect"
+            else "First identify the script/writing system of the text. "
+        )
+
+        prompt = (
+            "You are a professional transliteration expert with deep knowledge of writing systems worldwide.\n\n"
+            f"{source_instruction}"
+            f"Transliterate the following text into {target_script}.\n\n"
+            "CRITICAL INSTRUCTIONS:\n"
+            "- Transliteration means converting the SOUND/PRONUNCIATION of the text into the target script, NOT translating the meaning\n"
+            "- Preserve the original pronunciation as accurately as possible\n"
+            "- Use standard/widely-accepted transliteration conventions:\n"
+            "  * For Latin/Roman output: use the most common romanization system for the source language "
+            "(e.g., Hepburn for Japanese, Pinyin for Chinese, IAST-inspired for Hindi/Sanskrit, "
+            "ISO 233 inspired for Arabic)\n"
+            "  * For non-Latin output: use the standard script conventions of the target writing system\n"
+            "- Preserve spacing, punctuation, and line breaks\n"
+            "- Keep numbers as-is unless they are written in a non-Latin numeral system and target is Latin\n"
+            "- Do NOT translate the meaning — only convert the script\n"
+            "- Do NOT add any explanations, notes, or annotations\n\n"
+            "Return ONLY a JSON object with these keys:\n"
+            '- "source_script": the detected or confirmed source script name (e.g. "Devanagari", "Arabic", "Katakana")\n'
+            '- "result": the transliterated text\n\n'
+            f"Text to transliterate:\n{text}"
+        )
+
+        try:
+            response = await asyncio.to_thread(
+                self.model.generate_content, prompt
+            )
+            result = self._parse_response(response.text)
+            logger.info(
+                f"Transliteration successful: {result['source_script']} -> {target_script}"
+            )
+            return True, result["result"], result["source_script"], None
+
+        except Exception as e:
+            error_msg = f"Transliteration failed: {str(e)}"
+            logger.error(error_msg)
+            return False, None, None, error_msg
+
+    @staticmethod
+    def _parse_response(response_text: str) -> dict:
+        """Parse JSON from Gemini response."""
+        cleaned = response_text.strip()
+        cleaned = re.sub(r"^```(?:json)?\s*\n?", "", cleaned)
+        cleaned = re.sub(r"\n?```\s*$", "", cleaned)
+        cleaned = cleaned.strip()
+
+        parsed = json.loads(cleaned)
+        if not isinstance(parsed, dict) or "result" not in parsed or "source_script" not in parsed:
+            raise ValueError("Response must be a JSON object with 'result' and 'source_script' keys")
+        return parsed
+
+
 # Global service instances
 translation_service = TranslationService()
 subtitle_translation_service = SubtitleTranslationService()
 text_translation_service = TextTranslationService()
 language_detection_service = LanguageDetectionService()
+transliteration_service = TransliterationService()

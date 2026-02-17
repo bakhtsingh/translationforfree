@@ -17,8 +17,16 @@ from app.models import (
     TextTranslationResponse,
     LanguageDetectionRequest,
     LanguageDetectionResponse,
+    TransliterationRequest,
+    TransliterationResponse,
 )
-from app.services import translation_service, subtitle_translation_service, text_translation_service, language_detection_service
+from app.services import (
+    translation_service,
+    subtitle_translation_service,
+    text_translation_service,
+    language_detection_service,
+    transliteration_service,
+)
 
 # Configure logging
 logging.basicConfig(
@@ -169,6 +177,41 @@ async def detect_language(request: LanguageDetectionRequest):
         logger.error(f"Language detection endpoint failed: {e}")
         return LanguageDetectionResponse(
             success=False,
+            error_message=str(e),
+        )
+
+
+@app.post("/transliterate", response_model=TransliterationResponse)
+async def transliterate_text(request: TransliterationRequest):
+    """Transliterate text between writing systems via Gemini API."""
+    try:
+        logger.info(
+            f"Transliteration request: {request.source_script} -> {request.target_script} "
+            f"({len(request.text)} chars)"
+        )
+
+        success, transliterated_text, source_script, error_message = (
+            await transliteration_service.transliterate(
+                text=request.text,
+                source_script=request.source_script,
+                target_script=request.target_script,
+            )
+        )
+
+        return TransliterationResponse(
+            success=success,
+            transliterated_text=transliterated_text,
+            source_script=source_script or request.source_script,
+            target_script=request.target_script,
+            error_message=error_message,
+        )
+
+    except Exception as e:
+        logger.error(f"Transliteration endpoint failed: {e}")
+        return TransliterationResponse(
+            success=False,
+            source_script=request.source_script,
+            target_script=request.target_script,
             error_message=str(e),
         )
 

@@ -20,9 +20,9 @@ cd frontend && npm run dev        # Dev server → localhost:8080
 cd frontend && npm run build      # Production build → frontend/dist/
 cd frontend && npm run lint       # ESLint
 
-# Backend
-cd backend && pip install -r requirements.txt
-cd backend && python main.py      # Dev server → localhost:8000
+# Backend (ALWAYS use the venv)
+cd backend && source venv/bin/activate && pip install -r requirements.txt
+cd backend && source venv/bin/activate && python main.py      # Dev server → localhost:8000
 # API docs at http://localhost:8000/docs
 ```
 
@@ -90,6 +90,7 @@ translationforfree/                # Monorepo root
 - GA4 measurement ID is not a secret — it's public by design
 - Gemini API key was previously exposed client-side — fixed by routing through backend
 - CORS on backend must list specific origins (`translationforfree.com`, `localhost:8080`)
+- **Always use the venv** (`backend/venv`) when running backend commands — never use system Python
 
 ## Product Vision
 

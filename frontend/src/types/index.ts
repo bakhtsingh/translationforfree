@@ -28,3 +28,8 @@ export type {
   LanguageDetectionRequest,
   LanguageDetectionResponse,
 } from './languageDetection';
+
+export type {
+  TransliterationRequest,
+  TransliterationResponse,
+} from './transliteration';

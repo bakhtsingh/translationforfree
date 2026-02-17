@@ -10,6 +10,7 @@ import SubtitleTranslation from "./pages/SubtitleTranslation";
 import TextTranslation from "./pages/TextTranslation";
 import LanguageDetection from "./pages/LanguageDetection";
 import TranslationComparison from "./pages/TranslationComparison";
+import Transliteration from "./pages/Transliteration";
 import NotFound from "./pages/NotFound";
 import PageViewTracker from "./components/PageViewTracker";
 
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="/text-translate" element={<TextTranslation />} />
             <Route path="/detect-language" element={<LanguageDetection />} />
             <Route path="/compare-translations" element={<TranslationComparison />} />
+            <Route path="/transliterate" element={<Transliteration />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
