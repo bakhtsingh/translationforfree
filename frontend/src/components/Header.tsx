@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Globe, Menu } from "lucide-react";
+import { Globe, Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -7,6 +7,21 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const toolLinks = [
+  { to: "/text-translate", label: "Text Translator" },
+  { to: "/subtitle-translate", label: "Subtitle Translator" },
+  { to: "/detect-language", label: "Language Detector" },
+  { to: "/compare-translations", label: "Compare Translations" },
+  { to: "/transliterate", label: "Transliterate" },
+  { to: "/subtitle-converter", label: "SRT ↔ VTT Converter" },
+];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,36 +40,21 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-            <Link
-              to="/text-translate"
-              className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
-            >
-              Text Translator
-            </Link>
-            <Link
-              to="/subtitle-translate"
-              className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
-            >
-              Subtitle Translator
-            </Link>
-            <Link
-              to="/detect-language"
-              className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
-            >
-              Language Detector
-            </Link>
-            <Link
-              to="/compare-translations"
-              className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
-            >
-              Compare
-            </Link>
-            <Link
-              to="/transliterate"
-              className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
-            >
-              Transliterate
-            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105 outline-none">
+                Tools
+                <ChevronDown className="w-4 h-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-56">
+                {toolLinks.map((link) => (
+                  <DropdownMenuItem key={link.to} asChild>
+                    <Link to={link.to} className="w-full cursor-pointer">
+                      {link.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             <a
               href="#features"
               className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all hover:scale-105"
@@ -81,41 +81,16 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent side="right">
               <nav className="flex flex-col gap-4 mt-8">
-                <Link
-                  to="/text-translate"
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium hover:text-primary transition-colors"
-                >
-                  Text Translator
-                </Link>
-                <Link
-                  to="/subtitle-translate"
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium hover:text-primary transition-colors"
-                >
-                  Subtitle Translator
-                </Link>
-                <Link
-                  to="/detect-language"
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium hover:text-primary transition-colors"
-                >
-                  Language Detector
-                </Link>
-                <Link
-                  to="/compare-translations"
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium hover:text-primary transition-colors"
-                >
-                  Compare
-                </Link>
-                <Link
-                  to="/transliterate"
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium hover:text-primary transition-colors"
-                >
-                  Transliterate
-                </Link>
+                {toolLinks.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setIsOpen(false)}
+                    className="text-lg font-medium hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
                 <a
                   href="#features"
                   onClick={() => setIsOpen(false)}
