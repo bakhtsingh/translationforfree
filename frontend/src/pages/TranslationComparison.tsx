@@ -13,6 +13,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { translateText } from '@/services/textService';
 
 const MAX_CHARS = 5000;
@@ -161,6 +162,15 @@ export default function TranslationComparison() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead
+        title="Compare Translations — Multi-Language Side by Side | TranslationForFree"
+        description="Translate the same text into multiple languages side-by-side. Spot the best AI output across languages. Free, no signup."
+        path="/compare-translations"
+        toolSchema={{
+          name: 'Translation Comparison',
+          description: 'Translate text into multiple target languages in parallel and compare side by side.',
+        }}
+      />
       <Header />
 
       {/* Compact Hero */}

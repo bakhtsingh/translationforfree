@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { detectLanguage } from '@/services/languageDetectionService';
 
 const MAX_CHARS = 5000;
@@ -84,6 +85,15 @@ export default function LanguageDetection() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead
+        title="Language Detector — Identify Any Language Free | TranslationForFree"
+        description="Detect the language of any text instantly. Supports 100+ languages. Free, no signup, AI-powered. Paste text, get the language."
+        path="/detect-language"
+        toolSchema={{
+          name: 'Language Detector',
+          description: 'AI-powered language detector. Identifies the language of any text in 100+ languages.',
+        }}
+      />
       <Header />
 
       {/* Compact Hero */}

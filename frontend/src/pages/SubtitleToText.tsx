@@ -14,6 +14,7 @@ import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { SubtitleCue } from '@/types/subtitle';
 import { parseSRT, parseVTT, detectFormat } from '@/services/subtitleParser';
 import {
@@ -142,6 +143,15 @@ const SubtitleToText: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="SRT to TXT — Extract Text from Subtitles Free | TranslationForFree"
+        description="Convert SRT and VTT files to plain text. Strip timestamps, indices, and formatting tags. Free, no signup, runs in your browser."
+        path="/srt-to-txt"
+        toolSchema={{
+          name: 'Subtitle to Text Extractor',
+          description: 'Extract dialogue from SRT or VTT files as plain text. Choose lines, paragraphs, or single block output.',
+        }}
+      />
       <Header />
       <main className="flex-1">
         <div className="section-container py-12 max-w-3xl mx-auto space-y-8">

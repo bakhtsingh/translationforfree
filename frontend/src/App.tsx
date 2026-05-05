@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import ReactGA from "react-ga4";
 import Index from "./pages/Index";
 import SubtitleTranslation from "./pages/SubtitleTranslation";
@@ -33,13 +34,14 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <PageViewTracker />
-          <Routes>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <PageViewTracker />
+            <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/subtitle-translate" element={<SubtitleTranslation />} />
             <Route path="/text-translate" element={<TextTranslation />} />
@@ -55,6 +57,7 @@ const App = () => {
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 

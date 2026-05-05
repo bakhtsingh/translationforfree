@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { SubtitleCue } from '@/types/subtitle';
 import {
   parseSRT,
@@ -139,6 +140,15 @@ const SubtitleConverter: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="SRT to VTT Converter — Free Subtitle Format Converter | TranslationForFree"
+        description="Convert SRT to VTT and VTT to SRT instantly. Free subtitle format converter, runs in your browser, no upload."
+        path="/subtitle-converter"
+        toolSchema={{
+          name: 'SRT ↔ VTT Converter',
+          description: 'Convert subtitle files between SRT and VTT formats. Pure client-side conversion, no upload.',
+        }}
+      />
       <Header />
       <main className="flex-1">
         <div className="section-container py-12 max-w-3xl mx-auto space-y-8">

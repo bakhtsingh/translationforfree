@@ -13,6 +13,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { transliterateText } from '@/services/transliterationService';
 
 const MAX_CHARS = 5000;
@@ -174,6 +175,15 @@ export default function Transliteration() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead
+        title="Free Transliteration Tool — Convert Scripts Online | TranslationForFree"
+        description="Convert text between writing systems: Devanagari, Roman, Arabic, Cyrillic, Bengali, and more. Free, no signup, AI-powered."
+        path="/transliterate"
+        toolSchema={{
+          name: 'Transliteration Tool',
+          description: 'Convert text between writing systems including Devanagari, Roman, Arabic, Cyrillic, Bengali, and more.',
+        }}
+      />
       <Header />
 
       {/* Compact Hero */}

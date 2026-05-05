@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { FileUploader } from '@/components/subtitle/FileUploader';
 import { LanguageSelector } from '@/components/subtitle/LanguageSelector';
 import { SubtitleEditor } from '@/components/subtitle/SubtitleEditor';
@@ -98,6 +99,15 @@ function SubtitleTranslationContent() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead
+        title="Free Subtitle Translator — SRT & VTT to 50+ Languages | TranslationForFree"
+        description="Translate SRT and VTT subtitle files into 50+ languages with AI. Preserves timing. Free, no signup, runs in your browser."
+        path="/subtitle-translate"
+        toolSchema={{
+          name: 'Subtitle Translator',
+          description: 'AI-powered subtitle translator for SRT and VTT files. Preserves timing across 50+ languages.',
+        }}
+      />
       <Header />
 
       {/* Hero Section */}

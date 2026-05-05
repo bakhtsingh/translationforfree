@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { TextInput } from '@/components/text/TextInput';
 import { TextResult } from '@/components/text/TextResult';
 import { translateText } from '@/services/textService';
@@ -101,6 +102,15 @@ export default function TextTranslation() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead
+        title="Free AI Text Translator — 50+ Languages, No Signup | TranslationForFree"
+        description="Translate text into 50+ languages instantly with AI. Free, fast, no signup. Side-by-side editor, swap languages with one click."
+        path="/text-translate"
+        toolSchema={{
+          name: 'Text Translator',
+          description: 'AI-powered text translator across 50+ languages with side-by-side input and output.',
+        }}
+      />
       <Header />
 
       {/* Compact Hero */}

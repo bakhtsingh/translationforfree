@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { SubtitleCue } from '@/types/subtitle';
 import {
   parseSRT,
@@ -162,6 +163,15 @@ const SubtitleTimingShifter: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Subtitle Timing Shifter — Fix Out-of-Sync Subtitles Free | TranslationForFree"
+        description="Shift subtitle timing forward or backward by seconds or milliseconds. Fix out-of-sync SRT and VTT files free, no upload."
+        path="/shift-subtitles"
+        toolSchema={{
+          name: 'Subtitle Timing Shifter',
+          description: 'Shift all subtitle cues by ±N seconds with millisecond precision. Fixes out-of-sync SRT and VTT files.',
+        }}
+      />
       <Header />
       <main className="flex-1">
         <div className="section-container py-12 max-w-3xl mx-auto space-y-8">
