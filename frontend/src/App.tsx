@@ -12,6 +12,8 @@ import LanguageDetection from "./pages/LanguageDetection";
 import TranslationComparison from "./pages/TranslationComparison";
 import Transliteration from "./pages/Transliteration";
 import SubtitleConverter from "./pages/SubtitleConverter";
+import SubtitleTimingShifter from "./pages/SubtitleTimingShifter";
+import SubtitleToText from "./pages/SubtitleToText";
 import NotFound from "./pages/NotFound";
 import PageViewTracker from "./components/PageViewTracker";
 
@@ -45,6 +47,8 @@ const App = () => {
             <Route path="/compare-translations" element={<TranslationComparison />} />
             <Route path="/transliterate" element={<Transliteration />} />
             <Route path="/subtitle-converter" element={<SubtitleConverter />} />
+            <Route path="/shift-subtitles" element={<SubtitleTimingShifter />} />
+            <Route path="/srt-to-txt" element={<SubtitleToText />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

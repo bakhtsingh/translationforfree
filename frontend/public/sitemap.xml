@@ -55,4 +55,20 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Subtitle Timing Shifter Tool -->
+  <url>
+    <loc>https://translationforfree.com/shift-subtitles</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Subtitle to Text Extractor Tool -->
+  <url>
+    <loc>https://translationforfree.com/srt-to-txt</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

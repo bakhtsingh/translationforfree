@@ -21,6 +21,8 @@ const toolLinks = [
   { to: "/compare-translations", label: "Compare Translations" },
   { to: "/transliterate", label: "Transliterate" },
   { to: "/subtitle-converter", label: "SRT ↔ VTT Converter" },
+  { to: "/shift-subtitles", label: "Shift Subtitle Timing" },
+  { to: "/srt-to-txt", label: "Subtitle to Text" },
 ];
 
 const Header = () => {
