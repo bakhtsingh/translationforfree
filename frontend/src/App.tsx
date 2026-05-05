@@ -15,6 +15,7 @@ import Transliteration from "./pages/Transliteration";
 import SubtitleConverter from "./pages/SubtitleConverter";
 import SubtitleTimingShifter from "./pages/SubtitleTimingShifter";
 import SubtitleToText from "./pages/SubtitleToText";
+import TextCleaner from "./pages/TextCleaner";
 import NotFound from "./pages/NotFound";
 import PageViewTracker from "./components/PageViewTracker";
 
@@ -51,6 +52,7 @@ const App = () => {
             <Route path="/subtitle-converter" element={<SubtitleConverter />} />
             <Route path="/shift-subtitles" element={<SubtitleTimingShifter />} />
             <Route path="/srt-to-txt" element={<SubtitleToText />} />
+            <Route path="/clean-text" element={<TextCleaner />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

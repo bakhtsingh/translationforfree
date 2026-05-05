@@ -23,6 +23,7 @@ const toolLinks = [
   { to: "/subtitle-converter", label: "SRT ↔ VTT Converter" },
   { to: "/shift-subtitles", label: "Shift Subtitle Timing" },
   { to: "/srt-to-txt", label: "Subtitle to Text" },
+  { to: "/clean-text", label: "Text Cleaner" },
 ];
 
 const Header = () => {
