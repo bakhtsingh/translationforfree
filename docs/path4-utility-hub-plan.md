@@ -102,6 +102,32 @@ Subtitle Translation, SRT↔VTT Converter, Language Detector, Text Translation, 
 - Game Localization Hub (Ren'Py / Unity .po / Godot CSV / Unreal — placeholder-safe sub-tools)
 - Re-evaluate freemium gate (only if monthly Gemini spend > $200; currently nowhere close)
 
+### Additions from tool_ideas.txt review (May 2026)
+
+A 600-idea backlog (`docs/tool_ideas.txt`) was reviewed against the P0-P3 roadmap. Most of the ideas were already covered. Five gaps merit grafting onto the existing plan; everything else stays on the deliberate skip list.
+
+| Tool | Priority placement | Build | Gemini? | Why added |
+|---|---|---|---|---|
+| **Tone-Based Translator** (Formal / Casual / Professional Email / Academic / Polite / Legal-style / Medical-friendly / Business / Simple / Sermon / Customer Support presets) | **P0** (slot in after Subtitle Splitter) | 1 day | Yes | One tool collapses categories 2, 11 (social), 12 (email), 14 (education), 18 (microcopy) of tool_ideas.txt. Search intent is huge ("professional english to spanish translator", "translate email formally") with low KD. Reuses existing textService.ts with a tone parameter on the prompt. |
+| **Text Cleaner suite** (remove extra spaces, line breaks, page numbers, footnote markers, timestamps, duplicate lines, fix encoding, smart-quote normalization, word/char count, "prepare for ChatGPT" preset) | **P0** | 1 day | No (pure JS) | Very common pre-translation pain point. Zero API cost. Multi-toggle hub page with named presets ranks for many long-tails. |
+| **Bilingual Subtitle Generator** (pair source + translated SRT into one dual-language SRT, Netflix-style stacked-line render) | **P1** (subtitle-cluster completion) | 1 day | No (pure JS, takes two SRTs as input) | Distinct from the Subtitle Merger (which combines arbitrary SRT tracks). This is the language-learner gold standard — "create side-by-side subtitles" / "generate bilingual subtitles" search intent. |
+| **Image Text Translator** (Gemini Vision — translate menus, signboards, screenshots, WhatsApp images, product labels, medicine labels) | **P2-P3** | 3-4 days | Yes (Gemini Vision) | Real differentiator vs. text-only competitors. High traffic queries: "translate menu image", "translate signboard", "translate WhatsApp screenshot". Same Gemini SDK supports vision; no new infra. |
+| **Christian / Ministry Translation Toolkit** (Scripture Reference Parser + Validator, Bilingual Bible Study Handout Maker, Sermon Transcript Cleaner, Sermon Subtitle Translator with theological-vocab prompt boost) | **P2-P3** (4 sub-tools) | 5-7 days total | Mixed (parser/cleaner pure JS; sermon translator + handout use Gemini) | Owner's unfair-advantage niche, called out as the wedge in tool_ideas.txt category 15. Religious register is poorly handled by DeepL/Google/ChatGPT; the audience is passionate and share-y. Anchors a new content pillar (P8). |
+
+**Net effect:** roadmap grows from 25 → ~30-32 tools, content pillars grow from 7 → 8 (see P8 in pillars table below).
+
+### Deliberate skips from tool_ideas.txt (and why)
+
+The tool_ideas.txt list contains ~400 ideas that are *not* being added. Most fall into one of these categories:
+
+- **Generic language-pair pages** (e.g., "English to Spanish translator", category 1 — 30+ entries) — already served by the Text Translator with a language selector. Building dedicated pages without unique per-pair content is the classic HCU-bait pSEO pattern. Only the *subtitle-prefixed* pSEO matrix (in the P2 layer above) is approved.
+- **PDF/DOCX/PPTX translators as hero tools** (category 3) — Smallpdf, DocTranslator, Smartling own the SERP. Already a deliberate skip in the original plan.
+- **Native-script typing keyboards** (category 6) — heavy UI work for low marginal value; the "type English, get Hindi" use case is already covered by the Transliteration tool's reverse direction. The one exception worth revisiting later: **Kruti Dev to Unicode Hindi converter** (legacy-font conversion is a real, unsolved pain point for older Hindi documents — slot at P3 if traction warrants).
+- **Audio / Zoom / Teams / podcast transcript tools** (category 16) — defer until audio infra exists. For now, "Translate transcript" is just the Text Translator with extra cleanup, which the Text Cleaner suite (above) handles.
+- **Immigration / visa / medical / legal letter translators** (category 13) — implies certified-translation or medical-advice quality and carries liability. Use case lives inside the Tone-Based Translator with appropriate disclaimer; no dedicated landing pages.
+- **Most "fun/viral" translators** (category 24, e.g., "translate like a teenager", "Gen Z slang") — fold into Tone-Based Translator presets rather than separate tools. Saves SEO surface area; avoids domain-quality dilution.
+- **OCR-only / pure image cleaning tools** (category 17 minus translation) — out of focus; Gemini Vision-based **translation** of images is in (above), but standalone OCR is not.
+
 ### Skip list (do NOT build)
 
 - **PDF translator as hero / DOCX translator as hero** — Smallpdf, DocTranslator, MS Word own SERP. Build only as long-tail companion if at all.
@@ -126,6 +152,7 @@ Subtitle Translation, SRT↔VTT Converter, Language Detector, Text Translation, 
 | **P5** | **Localization for Indie SaaS / Indie Devs** — i18n, app store, README translation | Lokalise/Phrase target enterprise. Indie Hackers crowd needs no-budget answers. |
 | **P6** | **Translation Industry Briefing** — weekly news + commentary, "we tested it" angle | Slator paywalled, MultiLingual slow. We're free, fast, opinionated, and link to free tools. |
 | **P7** | **Subtitle Format & File-Plumbing Reference** — evergreen technical reference | StackOverflow answers stale. Tool-anchored definitive references. |
+| **P8** | **Christian / Ministry Translation Toolkit** — sermon, Bible study, devotional, prayer, missionary translation; theological-vocab respectful translation; bilingual handouts | Owner's unfair-advantage niche per tool_ideas.txt review (May 2026). Religious register is poorly handled by DeepL/Google/ChatGPT and the audience is passionate, under-served, and share-y. Specific sub-pillars: sermon localization for diaspora congregations, Bible study handout production, Scripture reference validation. |
 
 ### Cadence (5-10 hrs/week)
 
